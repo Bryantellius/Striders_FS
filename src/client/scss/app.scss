@@ -1,5 +1,5 @@
-$theme-colors: (
-    'primary': #0091ea //Covalence Blue!  :D
-);
+.list-group-item:hover {
+  cursor: pointer;
+}
 
-@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";

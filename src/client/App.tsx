@@ -1,36 +1,33 @@
-import * as React from 'react';
+import * as React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import SingleEntry from "./views/SingleEntry";
+import Home from "./views/Home";
+import Add from "./views/Add";
+import Edit from "./views/Edit";
 
-class App extends React.Component<IAppProps, IAppState> {
-	constructor(props: IAppProps) {
-		super(props);
-		this.state = {
-			name: null
-		};
-	}
+const App: React.FC<AppProps> = () => {
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/add">
+          <Add />
+        </Route>
+        <Route path="/edit/:activityId">
+          <Edit />
+        </Route>
+        <Route path="/activity/:activityId">
+          <SingleEntry />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
-	async componentDidMount() {
-		try {
-			let r = await fetch('/api/hello');
-			let name = await r.json();
-			this.setState({ name });
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	render() {
-		return (
-			<main className="container my-5">
-				<h1 className="text-primary text-center">Hello {this.state.name}!</h1>
-			</main>
-		);
-	}
-}
-
-export interface IAppProps {}
-
-export interface IAppState {
-	name: string;
-}
+export interface AppProps {}
 
 export default App;
