@@ -9,7 +9,7 @@ const ActivityCard: React.FC<ActivityCardProps> = (props) => {
 
   return (
     <li
-      className="list-group-item list-group-item-action"
+      className="list-group-item list-group-item-action my-2"
       onClick={handleClick}
     >
       <h5>

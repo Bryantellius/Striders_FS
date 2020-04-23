@@ -1,14 +1,48 @@
 import * as React from "react";
-import { useParams } from "react-router";
+import type { IActivity } from "../utils/types";
+import { NavLink, useParams } from "react-router-dom";
 
 const SingleEntry: React.FC<SingleEntryProps> = () => {
   const { activityId } = useParams();
 
+  const [activity, setActivity] = React.useState<IActivity>(null);
+
+  const getActivity = async () => {
+    let res = await fetch(`/api/activities/${activityId}`);
+    if (res.ok) {
+      let activity = await res.json();
+      setActivity(activity);
+    }
+  };
+
+  React.useEffect(() => {
+    getActivity();
+  }, []);
+
   return (
     <main className="container">
+      <section className="d-flex justify-content-between align-items-start">
+        <NavLink to={`/`} className="btn btn-dark">
+          Back
+        </NavLink>
+        <NavLink to={`/edit/${activityId}`} className="btn btn-secondary">
+          Edit
+        </NavLink>
+      </section>
       <section className="row my-2 justify-content-center">
-        <div className="col-md-6">
-          <h1 className="text-center">Single Entry View {activityId}</h1>
+        <div className="col-md-8">
+          <div className="card">
+            <div className="card-body d-flex justify-content-around">
+              <span>{activity?.type}</span>
+              <span>{activity?.distance} mi</span>
+              <span>{activity?.duration} min</span>
+            </div>
+            <div className="card-footer d-flex justify-content-end align-items-center">
+              <span className="badge badge-info">
+                {activity?.date.toString().slice(5, 10)}
+              </span>
+            </div>
+          </div>
         </div>
       </section>
     </main>

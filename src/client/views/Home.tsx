@@ -19,7 +19,7 @@ const Home: React.FC<HomeProps> = () => {
     <main className="container-fluid">
       <section className="row my-2 justify-content-center">
         <div className="col-md-6">
-          <ul className="list-group-flush">
+          <ul className="list-group-flush border-left border-right border-success">
             {activities.map((item) => (
               <ActivityCard
                 key={`${item.id}-${item.type}-${item.date}`}
