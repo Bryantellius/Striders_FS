@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import type { IActivity } from "../utils/types";
+import { apiService } from "../utils/apiService";
 
 const Edit: React.FC<EditProps> = () => {
   const { activityId } = useParams();
@@ -11,43 +12,28 @@ const Edit: React.FC<EditProps> = () => {
   const [distance, setDistance] = React.useState<string>("");
   const [duration, setDuration] = React.useState<string>("");
 
-  const getActivity = async () => {
-    const res = await fetch(`/api/activities/${activityId}`);
-    const activity: IActivity = await res.json();
-    setType(activity.type);
-    setDistance(activity.distance.toString());
-    setDuration(activity.duration);
-  };
-
   React.useEffect(() => {
-    getActivity();
+    (async () => {
+      const activity: IActivity = await apiService(
+        `/api/activities/${activityId}`
+      );
+      setType(activity.type);
+      setDistance(activity.distance.toString());
+      setDuration(activity.duration);
+    })();
   }, []);
 
   const updateAct = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log({ type, distance, duration });
     let activity = { type, distance, duration };
-    let res = await fetch(`/api/activities/${activityId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(activity),
-    });
-    if (res.ok) {
-      const result = await res.json();
-      history.push(`/activity/${activityId}`);
-    }
+    await apiService(`/api/activities/${activityId}`, "PUT", activity);
+    history.push(`/activity/${activityId}`);
   };
 
   const deleteAct = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let res = await fetch(`/api/activities/${activityId}`, {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      history.push(`/`);
-    }
+    await apiService(`/api/activities/${activityId}`, "DELETE");
+    history.push(`/`);
   };
 
   return (

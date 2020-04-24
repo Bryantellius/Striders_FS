@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { IActivity } from "../utils/types";
+import { apiService } from "../utils/apiService";
 import { NavLink, useParams } from "react-router-dom";
 
 const SingleEntry: React.FC<SingleEntryProps> = () => {
@@ -8,11 +9,8 @@ const SingleEntry: React.FC<SingleEntryProps> = () => {
   const [activity, setActivity] = React.useState<IActivity>(null);
 
   const getActivity = async () => {
-    let res = await fetch(`/api/activities/${activityId}`);
-    if (res.ok) {
-      let activity = await res.json();
-      setActivity(activity);
-    }
+    let activity = await apiService(`/api/activities/${activityId}`);
+    setActivity(activity);
   };
 
   React.useEffect(() => {
