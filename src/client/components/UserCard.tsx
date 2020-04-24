@@ -4,11 +4,11 @@ const UserCard: React.FC<IUserCardProps> = () => {
   return (
     <div className="card">
       <div className="card-body">
-        <h3>User Name</h3>
+        <h3 className="text-center">Ben Bryant</h3>
         <div className="row mb-2">
           <div className="col-md-4 p-0 d-flex flex-column align-items-center">
             <span className="usercard">Activities</span>
-            <span>89</span>
+            <span>3</span>
           </div>
           <div className="col-md-4 p-0 d-flex flex-column align-items-center">
             <span className="usercard text-center">Following</span>
@@ -22,7 +22,7 @@ const UserCard: React.FC<IUserCardProps> = () => {
         <div className="row mb-2">
         <div className="col-md-12 p-0 d-flex flex-column align-items-center">
             <span className="usercard">Last Activity</span>
-            <span>Run | 3 mi | 20:32 min</span>
+            <span>Run | 3 mi | 20:03 min</span>
           </div>
         </div>
         <div className="row d-flex justify-content-around align-items-center">
