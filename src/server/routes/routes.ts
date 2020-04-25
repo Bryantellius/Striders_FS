@@ -24,6 +24,17 @@ router.get("/:id?", async (req, res, next) => {
   }
 });
 
+router.get("/byUser/:id", async (req, res, next) => {
+  let id = Number(req.params.id);
+  try {
+    let activities = await db.Activities.allByUser(id);
+    res.json(activities);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     let activityDTO = req.body;

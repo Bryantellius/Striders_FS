@@ -1,4 +1,5 @@
 import * as React from "react";
+import { NavLink } from "react-router-dom";
 
 const UserCard: React.FC<IUserCardProps> = () => {
   return (
@@ -20,14 +21,16 @@ const UserCard: React.FC<IUserCardProps> = () => {
           </div>
         </div>
         <div className="row mb-2">
-        <div className="col-md-12 p-0 d-flex flex-column align-items-center">
+          <div className="col-md-12 p-0 d-flex flex-column align-items-center">
             <span className="usercard">Last Activity</span>
             <span>Run | 3 mi | 20:03 min</span>
           </div>
         </div>
         <div className="row d-flex justify-content-around align-items-center">
           <span className="usercard">View Training Log</span>
-          <button className="btn btn-sm btn-success">></button>
+          <NavLink to={`/user_activities/1`} className="btn btn-sm btn-success">
+            >
+          </NavLink>
         </div>
       </div>
     </div>

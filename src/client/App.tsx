@@ -5,6 +5,7 @@ import SingleEntry from "./views/SingleEntry";
 import Home from "./views/Home";
 import Add from "./views/Add";
 import Edit from "./views/Edit";
+import UserActivities from "./views/UserActivities";
 
 const App: React.FC<AppProps> = () => {
   return (
@@ -22,6 +23,9 @@ const App: React.FC<AppProps> = () => {
         </Route>
         <Route path="/activity/:activityId">
           <SingleEntry />
+        </Route>
+        <Route path="/user_activities/:userId">
+          <UserActivities />
         </Route>
       </Switch>
     </BrowserRouter>
