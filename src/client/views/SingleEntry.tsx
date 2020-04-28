@@ -2,6 +2,7 @@ import * as React from "react";
 import type { IActivity } from "../utils/types";
 import { apiService } from "../utils/apiService";
 import { NavLink, useParams } from "react-router-dom";
+import moment from "moment";
 
 const SingleEntry: React.FC<SingleEntryProps> = () => {
   const { activityId } = useParams();
@@ -37,7 +38,7 @@ const SingleEntry: React.FC<SingleEntryProps> = () => {
             </div>
             <div className="card-footer d-flex justify-content-end align-items-center">
               <span className="badge badge-info">
-                {activity?.date.toString().slice(5, 10)}
+                {moment(activity?.date).format("MMM Do")}
               </span>
             </div>
           </div>

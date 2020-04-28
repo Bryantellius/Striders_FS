@@ -12,10 +12,26 @@ export interface IUser {
   firstname?: string;
   lastname?: string;
   email?: string;
+  password?: string;
   _created?: Date;
+  role?: string;
 }
 
 export type Error = {
   status?: number;
   message?: string;
 };
+
+export interface IToken {
+  id: number;
+  userid: number;
+  token: string;
+  expires: Date;
+  _created: Date;
+}
+
+export interface IPayload {
+  [key: string]: any;
+  userid: number;
+  unique?: string;
+}

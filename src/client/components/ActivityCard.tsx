@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { IActivity } from "../utils/types";
 import { useHistory } from "react-router-dom";
-import { parse, stringify } from "querystring";
+import moment from "moment";
 
 const ActivityCard: React.FC<ActivityCardProps> = (props) => {
   const history = useHistory();
@@ -23,7 +23,7 @@ const ActivityCard: React.FC<ActivityCardProps> = (props) => {
       <hr />
       <div className="d-flex justify-content-end align-items-center">
         <small className="text-muted">
-          {props.entry.date.toString().slice(5, 10)}
+          {moment(props.entry.date).format("MMM Do")}
         </small>
       </div>
     </li>

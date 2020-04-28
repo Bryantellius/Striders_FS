@@ -2,6 +2,7 @@ import * as React from "react";
 import { apiService } from "../utils/apiService";
 import { IActivity } from "../utils/types";
 import { useHistory } from "react-router";
+import moment from "moment";
 
 const ViewUser: React.FC<ViewUserProps> = () => {
   const history = useHistory();
@@ -38,7 +39,7 @@ const ViewUser: React.FC<ViewUserProps> = () => {
                 </div>
                 <div className="card-footer d-flex justify-content-end align-items-center">
                   <span className="badge badge-info">
-                    {activity?.date.toString().slice(5, 10)}
+                    {moment(activity?.date).format("MMM Do")}
                   </span>
                 </div>
               </div>
