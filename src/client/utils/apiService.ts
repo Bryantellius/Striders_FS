@@ -1,4 +1,10 @@
-const token = null;
+import fetch from "isomorphic-fetch";
+
+export let Accesstoken: string = localStorage.getItem("token") || null;
+export let User: any = {
+  userid: localStorage.getItem("userid") || null,
+  role: localStorage.getItem("role") || null,
+};
 
 // Function for api calls, takes in url, method, body;
 // Returns res.json of call
@@ -7,11 +13,11 @@ export const apiService = async <T = any>(
   method: string = "GET",
   body?: {}
 ) => {
-  const headers: IHeader = {
+  const headers: any = {
     "Content-Type": "application/json",
   };
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+  if (Accesstoken) {
+    headers["Authorization"] = `Bearer ${Accesstoken}`;
   }
   try {
     const res = await fetch(url, {
@@ -22,14 +28,22 @@ export const apiService = async <T = any>(
     if (res.ok) {
       return <T>await res.json();
     } else {
-      return null;
+      return false;
     }
   } catch (e) {
     console.log(e);
-    return null;
+    throw e;
   }
 };
 
-interface IHeader {
-  [key: string]: string;
-}
+export const setAccessToken = (
+  token: string,
+  user: {} = { userid: undefined, role: "visitor" }
+) => {
+  Accesstoken = token;
+  User = user;
+
+  localStorage.setItem("token", Accesstoken);
+  localStorage.setItem("userid", User.userid);
+  localStorage.setItem("role", User.role);
+};

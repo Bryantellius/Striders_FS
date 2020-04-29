@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
-import { apiService } from "../utils/apiService";
+import { apiService, User } from "../utils/apiService";
 
 const Add: React.FC<AddProps> = () => {
   const history = useHistory();
@@ -11,7 +11,7 @@ const Add: React.FC<AddProps> = () => {
 
   const addAct = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const activity = { type, distance, duration, userid: 1 };
+    const activity = { type, distance, duration, userid: User.userid };
     const result = await apiService(`/api/activities`, "POST", activity);
     history.push(`/activity/${result.activityId}`);
   };

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useParams, useHistory } from "react-router-dom";
-import type { IActivity } from "../utils/types";
 import { apiService } from "../utils/apiService";
 
 const Edit: React.FC<EditProps> = () => {
@@ -14,12 +13,10 @@ const Edit: React.FC<EditProps> = () => {
 
   React.useEffect(() => {
     (async () => {
-      const activity: IActivity = await apiService(
-        `/api/activities/${activityId}`
-      );
-      setType(activity.type);
-      setDistance(activity.distance.toString());
-      setDuration(activity.duration);
+      const res = await apiService(`/api/activities/${activityId}`);
+      setType(res.type);
+      setDistance(res.distance.toString());
+      setDuration(res.duration);
     })();
   }, []);
 
