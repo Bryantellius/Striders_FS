@@ -17,7 +17,7 @@ export const findOne = (token: string, id: number) => {
 export const insert = (userid: number) => {
   return new Promise<{ insertId: number }>((resolve, reject) => {
     Connection.query(
-      `INSERT INTO accesstokens SET userid = ?, token = ?`,
+      `INSERT INTO accesstokens SET userid = ?`,
       userid,
       (err, results) => {
         if (err) reject(err);
@@ -30,8 +30,8 @@ export const insert = (userid: number) => {
 export const update = (id: number, token: string) => {
   return new Promise<{ rowsAffected: number }>((resolve, reject) => {
     Connection.query(
-      `UPDATE accesstokens token = ? WHERE id = ?`,
-      [id, token],
+      `UPDATE accesstokens SET token = ? WHERE id = ?`,
+      [token, id],
       (err, results) => {
         if (err) reject(err);
         resolve(results);

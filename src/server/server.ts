@@ -1,23 +1,28 @@
 import * as express from "express";
-import apiRouter from "./routes";
+import router from "./routes";
 import config from "./config";
 import * as path from "path";
-import * as morgan from "morgan";
 import type { Error } from "./utils/types";
-import * as passport from 'passport';
+import * as passport from "passport";
+import * as cors from "cors";
+import * as helmet from "helmet";
+import * as compression from "compression";
 
-import './middleware/bearerstrategy';
-import './middleware/localstrategy';
+import "./middleware/bearerstrategy";
+import "./middleware/localstrategy";
 
 const app = express();
 
+app.use(helmet());
+app.use(compression());
+app.use(cors());
+
 app.use(express.static("public"));
+app.use(passport.initialize());
 app.use(express.json());
 
-app.use(passport.initialize());
 
-app.use(morgan("dev"));
-app.use("/api", apiRouter);
+app.use(router);
 
 app.use(
   (

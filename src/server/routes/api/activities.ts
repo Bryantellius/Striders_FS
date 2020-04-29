@@ -4,7 +4,8 @@ import db from "../../db/models";
 const router = express.Router();
 
 const isLoggedIn: express.RequestHandler = (req: any, res, next) => {
-  if (!req.user || req.user.role !== "admin") {
+  if (!req.user || req.user.role !== "guest") {
+    console.log(`req.user.role: ${req.user.role}`);
     return res.sendStatus(401);
   } else {
     return next();
@@ -12,7 +13,7 @@ const isLoggedIn: express.RequestHandler = (req: any, res, next) => {
 };
 
 // Returns an array of all activities or one activity by id
-router.get("/:id?", async (req, res, next) => {
+router.get("/:id?", isLoggedIn, async (req, res, next) => {
   let id = Number(req.params.id);
   if (id) {
     try {
@@ -34,7 +35,7 @@ router.get("/:id?", async (req, res, next) => {
 });
 
 // Returns an array of activities associated with a userid
-router.get("/byUser/:id", async (req, res, next) => {
+router.get("/byUser/:id", isLoggedIn, async (req, res, next) => {
   let id = Number(req.params.id);
   try {
     let activities = await db.Activities.allByUser(id);
@@ -46,7 +47,7 @@ router.get("/byUser/:id", async (req, res, next) => {
 });
 
 // Inserts activity
-router.post("/", async (req, res, next) => {
+router.post("/", isLoggedIn, async (req, res, next) => {
   try {
     let activityDTO = req.body;
     let { insertId: activityId } = await db.Activities.add(activityDTO);
@@ -58,7 +59,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // Updates activity by id
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", isLoggedIn, async (req, res, next) => {
   try {
     let id = Number(req.params.id);
     let activityDTO = req.body;
@@ -71,7 +72,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 // Deletes activity by id
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
     let id = Number(req.params.id);
     let { affectedRows } = await db.Activities.remove(id);
