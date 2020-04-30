@@ -35,6 +35,7 @@ const Add: React.FC<AddProps> = () => {
             <input
               id="distance"
               className="form-control"
+              placeholder="0.0"
               value={distance}
               onChange={(e) => setDistance(e.target.value)}
             ></input>

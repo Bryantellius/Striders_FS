@@ -14,7 +14,7 @@ const NavBar: React.FC<NavBarProps> = () => {
     localStorage.clear();
     RemoveAccessToken();
     console.log(User);
-    history.push("/sign_up");
+    history.push("/sign_up")
   };
 
   const goAdd = () => {
@@ -42,7 +42,7 @@ const NavBar: React.FC<NavBarProps> = () => {
           <NavLink
             exact
             to={to}
-            className="nav-link bg-light text-success rounded text-success mx-2"
+            className="nav-link bg-light text-dark rounded mx-2"
           >
             {state}
           </NavLink>
@@ -57,13 +57,13 @@ const NavBar: React.FC<NavBarProps> = () => {
           <NavLink
             exact
             to="/"
-            className="nav-link text-light mx-2"
+            className="btn nav-link btn-light text-dark mx-2"
             activeClassName="border-bottom"
           >
             Home
           </NavLink>
           <Dropdown>
-            <Dropdown.Toggle variant="light" id="dropdown-options">
+            <Dropdown.Toggle id="dropdown-options" className="btn nav-link btn-light text-dark">
               Options
             </Dropdown.Toggle>
 
