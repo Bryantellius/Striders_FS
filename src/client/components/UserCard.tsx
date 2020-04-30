@@ -1,5 +1,6 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
+import { apiService, User } from '../utils/apiService'; 
 
 const UserCard: React.FC<IUserCardProps> = () => {
   return (

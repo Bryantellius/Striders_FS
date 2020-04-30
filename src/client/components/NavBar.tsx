@@ -1,12 +1,25 @@
 import * as React from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { User } from "../utils/apiService";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
+import { User, RemoveAccessToken } from "../utils/apiService";
 
 const NavBar: React.FC<NavBarProps> = () => {
+  const history = useHistory();
   const location = useLocation();
 
   const [state, setState] = React.useState<string>("");
   const [to, setTo] = React.useState<string>("");
+
+  const signout = () => {
+    localStorage.clear();
+    RemoveAccessToken();
+    console.log(User);
+    history.push("/sign_up");
+  };
+
+  const goAdd = () => {
+    history.push("/add");
+  };
 
   React.useEffect(() => {
     (async () => {
@@ -49,14 +62,22 @@ const NavBar: React.FC<NavBarProps> = () => {
           >
             Home
           </NavLink>
-          <NavLink
-            exact
-            to="/add"
-            className="nav-link text-light mx-2"
-            activeClassName="border-bottom"
-          >
-            Add
-          </NavLink>
+          <Dropdown>
+            <Dropdown.Toggle variant="light" id="dropdown-options">
+              Options
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item>
+                <span className="text-dark nav-link" onClick={goAdd}>
+                  Add
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item onClick={signout}>
+                <span className="nav-link text-dark">Sign Out</span>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </nav>
     );

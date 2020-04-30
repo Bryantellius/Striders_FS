@@ -56,7 +56,7 @@ const SignUp: React.FC<SignUpProps> = () => {
               className="btn btn-success btn-block w-25 mx-auto my-3"
               onClick={SignUp}
             >
-              Sign In
+              Sign Up
             </button>
           </form>
         </div>
