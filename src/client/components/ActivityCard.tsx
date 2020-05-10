@@ -8,7 +8,7 @@ const ActivityCard: React.FC<ActivityCardProps> = (props) => {
   const handleClick = () => history.push(`/activity/${props.entry.id}`);
 
   return (
-    <div className="card my-2 p-3 shadow-sm">
+    <div className="card my-2 p-3 border-light shadow-sm">
       <span>
         {props.entry.firstname} {props.entry.lastname}
       </span>
@@ -19,15 +19,15 @@ const ActivityCard: React.FC<ActivityCardProps> = (props) => {
       <p>{props.entry.desciption}</p>
       <div className="row">
         <div className="col-sm-4 d-flex flex-column align-items-center">
-          <small>Type</small>
+          <small className="text-muted">Type</small>
           <span>{props.entry.type}</span>
         </div>
         <div className="col-sm-4 d-flex flex-column align-items-center">
-          <small>Distance</small>
-          <span>{props.entry.distance}</span>
+          <small className="text-muted">Distance</small>
+          <span>{props.entry.distance}mi</span>
         </div>
         <div className="col-sm-4 d-flex flex-column align-items-center">
-          <small>Duration</small>
+          <small className="text-muted">Duration</small>
           <span>{props.entry.duration}</span>
         </div>
       </div>

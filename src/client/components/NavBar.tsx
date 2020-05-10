@@ -31,7 +31,7 @@ const NavBar: React.FC<NavBarProps> = () => {
 
   if (!User || User.user === null || User.role !== "guest") {
     return (
-      <nav className="nav bg-light justify-content-between align-items-center p-3 mb-3 shadow">
+      <nav className="nav justify-content-between align-items-center p-3">
         <h1 className="text-success">Striders</h1>
         <div className="d-flex">
           <NavLink
@@ -46,7 +46,7 @@ const NavBar: React.FC<NavBarProps> = () => {
     );
   } else {
     return (
-      <nav className="nav bg-light justify-content-between align-items-center p-3 mb-3 shadow">
+      <nav className="nav justify-content-between align-items-center p-3 shadow-sm">
         <NavLink id="striderLogo" to="/" className="text-success nav-link">
           Striders
         </NavLink>

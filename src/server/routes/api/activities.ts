@@ -83,4 +83,15 @@ router.delete("/:id", isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    let id = Number(req.params.id);
+    let [user] = await db.Activities.getUser(id);
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
 export default router;

@@ -37,9 +37,14 @@ export const allByUser = async (id: number) => {
     `SELECT a.id, u.firstname, u.lastname, a.type, a.title, a.desciption, a.duration, a.distance, a._created as date
   FROM activity a 
   JOIN users u ON u.id = a.userid
-  WHERE u.id = 1`,
+  WHERE u.id = ?`,
     [id]
   );
+};
+
+// Returns user info
+export const getUser = async (id: number) => {
+  return Query(`CALL spGetUser(?)`, [id]);
 };
 
 export default {
@@ -49,4 +54,5 @@ export default {
   update,
   remove,
   allByUser,
+  getUser,
 };

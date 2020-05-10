@@ -1,5 +1,5 @@
 $theme-colors: (
-  "success": #FF7600
+  "success": #ff7600,
 );
 
 .list-group-item:hover {
@@ -8,6 +8,16 @@ $theme-colors: (
 
 .usercard {
   font-size: x-small;
+}
+
+#homeActivities {
+  overflow-y: scroll;
+  height: 30rem;
+}
+
+main {
+  background-color: rgb(245, 245, 245);
+  padding: 1rem;
 }
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

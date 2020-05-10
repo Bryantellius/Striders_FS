@@ -24,12 +24,6 @@ const SingleEntry: React.FC<SingleEntryProps> = () => {
       <div className="row">
         <div className="col-md-3">
           <button
-            className="btn btn-success text-light"
-            onClick={() => history.push("/")}
-          >
-            Back
-          </button>
-          <button
             className="btn btn-info text-light"
             onClick={() => history.push(`/edit/${activity.id}`)}
           >
@@ -57,7 +51,7 @@ const SingleEntry: React.FC<SingleEntryProps> = () => {
                 </div>
                 <div className="col-md-6 card-deck">
                   <div className="card d-flex flex-column justify-content-center align-items-center p-3">
-                    <span>{activity?.distance}</span>
+                    <span>{activity?.distance}mi</span>
                     <small className="text-muted">Distance</small>
                   </div>
                   <div className="card d-flex flex-column justify-content-center align-items-center p-3">

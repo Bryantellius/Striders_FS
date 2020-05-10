@@ -27,7 +27,7 @@ const Home: React.FC<HomeProps> = () => {
         <div className="col-md-3">
           <UserCard />
         </div>
-        <div className="col-md-6">
+        <div id="homeActivities" className="col-md-6">
           <div>
             {activities.map((item) => (
               <ActivityCard
