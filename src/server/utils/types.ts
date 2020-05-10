@@ -2,6 +2,8 @@ export interface IActivity {
   id?: number;
   userid?: number;
   type?: string;
+  title?: string;
+  description: string;
   duration?: string;
   distance?: number;
   _created?: Date;

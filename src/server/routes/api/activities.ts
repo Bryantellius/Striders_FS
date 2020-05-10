@@ -50,8 +50,8 @@ router.get("/byUser/:id", isLoggedIn, async (req, res, next) => {
 router.post("/", isLoggedIn, async (req, res, next) => {
   try {
     let activityDTO = req.body;
-    let { insertId: activityId } = await db.Activities.add(activityDTO);
-    res.json({ activityId, msg: "Activity inserted." });
+    let details = await db.Activities.add(activityDTO);
+    res.json({ details, msg: "Activity inserted." });
   } catch (e) {
     console.log(e);
     next(e);
@@ -63,8 +63,8 @@ router.put("/:id", isLoggedIn, async (req, res, next) => {
   try {
     let id = Number(req.params.id);
     let activityDTO = req.body;
-    let { affectedRows } = await db.Activities.update(id, activityDTO);
-    res.json({ affectedRows, msg: "Activity updated." });
+    let details = await db.Activities.update(id, activityDTO);
+    res.json({ details, msg: "Activity updated." });
   } catch (e) {
     console.log(e);
     next(e);
@@ -75,8 +75,8 @@ router.put("/:id", isLoggedIn, async (req, res, next) => {
 router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
     let id = Number(req.params.id);
-    let { affectedRows } = await db.Activities.remove(id);
-    res.json({ affectedRows, msg: "Activity deleted." });
+    let details = await db.Activities.remove(id);
+    res.json({ details, msg: "Activity deleted." });
   } catch (e) {
     console.log(e);
     next(e);

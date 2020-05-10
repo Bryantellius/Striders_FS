@@ -8,25 +8,18 @@ const ActivityCard: React.FC<ActivityCardProps> = (props) => {
   const handleClick = () => history.push(`/activity/${props.entry.id}`);
 
   return (
-    <li
-      className="list-group-item list-group-item-action my-2"
-      onClick={handleClick}
-    >
-      <h5>
+    <div className="card my-2 p-3 shadow-sm">
+      <span>
         {props.entry.firstname} {props.entry.lastname}
-      </h5>
+      </span>
+      <small className="text-muted">
+        {moment(props.entry.date).format("MMM Do")}
+      </small>
+      <h3 onClick={handleClick}>{props.entry.title}</h3>
       <p className="d-flex justify-content-around pt-3">
-        <span>{props.entry.type}</span>
-        <span>{props.entry.distance} mi</span>
-        <span>{props.entry.duration} min</span>
+        {props.entry.description}
       </p>
-      <hr />
-      <div className="d-flex justify-content-end align-items-center">
-        <small className="text-muted">
-          {moment(props.entry.date).format("MMM Do")}
-        </small>
-      </div>
-    </li>
+    </div>
   );
 };
 

@@ -28,14 +28,14 @@ const Home: React.FC<HomeProps> = () => {
           <UserCard />
         </div>
         <div className="col-md-6">
-          <ul className="list-group-flush border-left border-right border-success">
+          <div>
             {activities.map((item) => (
               <ActivityCard
                 key={`${item.id}-${item.type}-${item.date}`}
                 entry={item}
               />
             ))}
-          </ul>
+          </div>
         </div>
         <div className="col-md-3">Suggested Friends Col</div>
       </section>

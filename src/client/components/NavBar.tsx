@@ -1,6 +1,5 @@
 import * as React from "react";
 import { NavLink, useLocation, useHistory } from "react-router-dom";
-import { Dropdown } from "react-bootstrap";
 import { User, RemoveAccessToken } from "../utils/apiService";
 
 const NavBar: React.FC<NavBarProps> = () => {
@@ -14,11 +13,7 @@ const NavBar: React.FC<NavBarProps> = () => {
     localStorage.clear();
     RemoveAccessToken();
     console.log(User);
-    history.push("/sign_up")
-  };
-
-  const goAdd = () => {
-    history.push("/add");
+    history.push("/sign_up");
   };
 
   React.useEffect(() => {
@@ -36,13 +31,13 @@ const NavBar: React.FC<NavBarProps> = () => {
 
   if (!User || User.user === null || User.role !== "guest") {
     return (
-      <nav className="nav bg-success justify-content-between align-items-center p-3 mb-3 shadow">
-        <h1 className="text-light">Striders</h1>
+      <nav className="nav bg-light justify-content-between align-items-center p-3 mb-3 shadow">
+        <h1 className="text-success">Striders</h1>
         <div className="d-flex">
           <NavLink
             exact
             to={to}
-            className="nav-link bg-light text-dark rounded mx-2"
+            className="nav-link btn btn-outline-success text-success rounded mx-2"
           >
             {state}
           </NavLink>
@@ -51,33 +46,23 @@ const NavBar: React.FC<NavBarProps> = () => {
     );
   } else {
     return (
-      <nav className="nav bg-success justify-content-between align-items-center p-3 mb-3 shadow">
-        <h1 className="text-light">Striders</h1>
+      <nav className="nav bg-light justify-content-between align-items-center p-3 mb-3 shadow">
+        <NavLink id="striderLogo" to="/" className="text-success nav-link">
+          Striders
+        </NavLink>
         <div className="d-flex">
           <NavLink
-            exact
-            to="/"
-            className="btn nav-link btn-light text-dark mx-2"
-            activeClassName="border-bottom"
+            to="/add"
+            className="btn nav-link btn-outline-success text-success mx-2"
           >
-            Home
+            Add
           </NavLink>
-          <Dropdown>
-            <Dropdown.Toggle id="dropdown-options" className="btn nav-link btn-light text-dark">
-              Options
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item>
-                <span className="text-dark nav-link" onClick={goAdd}>
-                  Add
-                </span>
-              </Dropdown.Item>
-              <Dropdown.Item onClick={signout}>
-                <span className="nav-link text-dark">Sign Out</span>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          <button
+            className="btn nav-link btn-outline-success text-success mx-2"
+            onClick={signout}
+          >
+            Sign Out
+          </button>
         </div>
       </nav>
     );
