@@ -13,12 +13,24 @@ const ActivityCard: React.FC<ActivityCardProps> = (props) => {
         {props.entry.firstname} {props.entry.lastname}
       </span>
       <small className="text-muted">
-        {moment(props.entry.date).format("MMM Do")}
+        {moment(props.entry.date).format("MMM Do LT")}
       </small>
       <h3 onClick={handleClick}>{props.entry.title}</h3>
-      <p className="d-flex justify-content-around pt-3">
-        {props.entry.description}
-      </p>
+      <p>{props.entry.desciption}</p>
+      <div className="row">
+        <div className="col-sm-4 d-flex flex-column align-items-center">
+          <small>Type</small>
+          <span>{props.entry.type}</span>
+        </div>
+        <div className="col-sm-4 d-flex flex-column align-items-center">
+          <small>Distance</small>
+          <span>{props.entry.distance}</span>
+        </div>
+        <div className="col-sm-4 d-flex flex-column align-items-center">
+          <small>Duration</small>
+          <span>{props.entry.duration}</span>
+        </div>
+      </div>
     </div>
   );
 };

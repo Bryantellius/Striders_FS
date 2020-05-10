@@ -8,12 +8,21 @@ const Add: React.FC<AddProps> = () => {
   const [type, setType] = React.useState<string>("Run");
   const [distance, setDistance] = React.useState<string>("");
   const [duration, setDuration] = React.useState<string>("");
+  const [title, setTitle] = React.useState<string>("");
+  const [desciption, setDesciption] = React.useState<string>("");
 
   const addAct = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const activity = { type, distance, duration, userid: User.userid };
+    const activity = {
+      type,
+      distance,
+      duration,
+      userid: User.userid,
+      title,
+      desciption,
+    };
     const result = await apiService(`/api/activities`, "POST", activity);
-    history.push(`/activity/${result.activityId}`);
+    history.push(`/`);
   };
 
   return (
@@ -30,6 +39,8 @@ const Add: React.FC<AddProps> = () => {
             >
               <option value="Run">Run</option>
               <option value="Walk">Walk</option>
+              <option value="Bike">Bike</option>
+              <option value="Swim">Swim</option>
             </select>
             <label htmlFor="distance">Distance</label>
             <input
@@ -38,17 +49,30 @@ const Add: React.FC<AddProps> = () => {
               placeholder="0.0"
               value={distance}
               onChange={(e) => setDistance(e.target.value)}
-            ></input>
+            />
             <label htmlFor="duration">Duration</label>
-            <div className="d-flex input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="00:00:00"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-              ></input>
-            </div>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="00:00:00"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+            />
+            <label htmlFor="duration">Title</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Morning Run, e.g."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <label htmlFor="duration">Description</label>
+            <textarea
+              className="form-control"
+              placeholder="Description of activity"
+              value={desciption}
+              onChange={(e) => setDesciption(e.target.value)}
+            />
             <button
               className="btn btn-success btn-block w-25 mx-auto my-3"
               onClick={addAct}

@@ -3,7 +3,7 @@ export interface IActivity {
   userid?: number;
   type?: string;
   title?: string;
-  description: string;
+  desciption: string;
   duration?: string;
   distance?: number;
   _created?: Date;

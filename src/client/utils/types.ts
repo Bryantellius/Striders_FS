@@ -4,7 +4,7 @@ export interface IActivity {
   lastname: string;
   type: string;
   title: string;
-  description: string;
+  desciption: string;
   duration: string;
   distance: number;
   date: Date;
