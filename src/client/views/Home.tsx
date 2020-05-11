@@ -25,7 +25,7 @@ const Home: React.FC<HomeProps> = () => {
     <main className="container-fluid">
       <section className="row my-2 justify-content-center">
         <div className="col-md-3">
-          <UserCard />
+          <UserCard entries={activities}/>
         </div>
         <div id="homeActivities" className="col-md-6">
           <div>

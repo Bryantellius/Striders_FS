@@ -1,5 +1,6 @@
 export interface IActivity {
   id: number;
+  userid: number;
   firstname: string;
   lastname: string;
   type: string;

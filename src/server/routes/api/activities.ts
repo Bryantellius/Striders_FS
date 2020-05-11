@@ -86,7 +86,18 @@ router.delete("/:id", isLoggedIn, async (req, res, next) => {
 router.get("/user/:id", async (req, res, next) => {
   try {
     let id = Number(req.params.id);
-    let [user] = await db.Activities.getUser(id);
+    let [user] = await db.Activities.getUserActivities(id);
+    res.json(user.reverse());
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
+router.get("/user_details/:id", async (req, res, next) => {
+  try {
+    let id = Number(req.params.id);
+    let [user] = await db.Activities.getUserDetails(id);
     res.json(user);
   } catch (err) {
     console.log(err);

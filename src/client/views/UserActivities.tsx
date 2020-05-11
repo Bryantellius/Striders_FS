@@ -1,5 +1,5 @@
 import * as React from "react";
-import { apiService } from "../utils/apiService";
+import { apiService, User } from "../utils/apiService";
 import { IActivity } from "../utils/types";
 import { useHistory } from "react-router";
 import moment from "moment";
@@ -8,6 +8,7 @@ import ActivityCard from "../components/ActivityCard";
 const ViewUser: React.FC<ViewUserProps> = () => {
   const history = useHistory();
 
+  const [user, setUser] = React.useState<any>([]);
   const [activities, setActivities] = React.useState<IActivity[]>([]);
   const [runs, setRuns] = React.useState<IActivity[]>([]);
   const [walks, setWalks] = React.useState<IActivity[]>([]);
@@ -16,8 +17,14 @@ const ViewUser: React.FC<ViewUserProps> = () => {
 
   React.useEffect(() => {
     (async () => {
-      let activities = await apiService(`/api/activities/user/5`);
+      let activities = await apiService(`/api/activities/user/${User.userid}`);
       setActivities(activities);
+
+      let user = await apiService(
+        `/api/activities/user_details/${User.userid}`
+      );
+      setUser(user);
+
       let runs = activities.filter(
         (activity: IActivity) => activity.type === "Run"
       );
@@ -40,10 +47,21 @@ const ViewUser: React.FC<ViewUserProps> = () => {
   return (
     <main className="container">
       <section className="row my-2 justify-content-center">
-        <div className="col-md-6">
-          <div className="avatar p-3 bg-success text-light rounded">B</div>
-          <h1 className="text-center">Ben Bryant</h1>
-        </div>
+        {user?.map((user: any) => {
+          return (
+            <div className="col-md-6 d-flex flex-column justify-content-start align-items-center" key={`${user.id}-${user.firstname}`}>
+              <div className="avatar bg-success text-light text-center">
+                {user.firstname[0]}
+              </div>
+              <h1 className="text-center">
+                {user.firstname} {user.lastname}
+              </h1>
+              <small className="text-muted text-center d-block">
+                Member since {moment(user.created).format("MMM Do YYYY")}
+              </small>
+            </div>
+          );
+        })}
         <div className="col-md-6">
           <div className="row row-cols-2 row-cols-sm-2 p-3">
             <div className="card border-light d-flex flex-column justify-content-center align-items-center p-2 shadow-sm">
@@ -77,7 +95,7 @@ const ViewUser: React.FC<ViewUserProps> = () => {
           })}
         </div>
         <div className="col-md-6">
-        <h5>Activity Breakdown</h5>
+          <h5>Activity Breakdown</h5>
           <div className="progress my-4">
             <div
               className="progress-bar bg-success w-25"
