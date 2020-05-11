@@ -20,4 +20,15 @@ main {
   padding: 1rem;
 }
 
+.logo {
+  font-size: xx-large;
+  font-family: fantasy;
+  font-weight: 700;
+}
+
+.inputError {
+  color: red;
+  display: none;
+}
+
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

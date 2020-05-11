@@ -31,13 +31,13 @@ const NavBar: React.FC<NavBarProps> = () => {
 
   if (!User || User.user === null || User.role !== "guest") {
     return (
-      <nav className="nav justify-content-between align-items-center p-3">
-        <h1 className="text-success">Striders</h1>
+      <nav className="nav justify-content-between align-items-center p-2 shadow-sm">
+        <h1 className="logo text-success">Striders</h1>
         <div className="d-flex">
           <NavLink
             exact
             to={to}
-            className="nav-link btn btn-outline-success text-success rounded mx-2"
+            className="nav-link btn btn-outline-success btn-sm text-success rounded mx-2"
           >
             {state}
           </NavLink>
@@ -46,19 +46,19 @@ const NavBar: React.FC<NavBarProps> = () => {
     );
   } else {
     return (
-      <nav className="nav justify-content-between align-items-center p-3 shadow-sm">
-        <NavLink id="striderLogo" to="/" className="text-success nav-link">
+      <nav className="nav justify-content-between align-items-center shadow-sm">
+        <NavLink to="/" className="logo text-success nav-link">
           Striders
         </NavLink>
         <div className="d-flex">
           <NavLink
             to="/add"
-            className="btn nav-link btn-outline-success text-success mx-2"
+            className="btn nav-link btn-outline-success btn-sm text-success mx-2"
           >
             Add
           </NavLink>
           <button
-            className="btn nav-link btn-outline-success text-success mx-2"
+            className="btn nav-link btn-outline-success btn-sm text-success mx-2"
             onClick={signout}
           >
             Sign Out
