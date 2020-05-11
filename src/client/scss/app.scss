@@ -47,8 +47,17 @@ main {
   font-weight: 600;
 }
 
+.avatarReallySmall {
+  height: 25px;
+  width: 25px;
+  border-radius: 25%;
+  font-size: small;
+  font-weight: 600;
+}
+
 .avatarSmall:hover,
-.activityTitle:hover {
+.activityTitle:hover,
+.avatarReallySmall {
   cursor: pointer;
 }
 

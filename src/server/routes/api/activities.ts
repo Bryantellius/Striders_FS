@@ -105,4 +105,26 @@ router.get("/user_details/:id", async (req, res, next) => {
   }
 });
 
+router.get("/allUsers/:id", async (req, res, next) => {
+  try {
+    let id = Number(req.params.id);
+    let [users] = await db.Activities.getSuggestedUsers(id);
+    res.json(users);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
+router.post("/addUser", async (req, res, next) => {
+  try {
+    let body = req.body;
+    let {insertId}: any = await db.Activities.addUser(body);
+    res.json({insertId});
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
 export default router;

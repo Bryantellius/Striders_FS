@@ -52,6 +52,16 @@ export const getUserDetails = async (id: number) => {
   return Query(`CALL spUserDetails(?)`, [id]);
 };
 
+// Returns all members not followed by user
+export const getSuggestedUsers = async (id: number) => {
+  return Query(`CALL spSuggestedUsers(?)`, [id]);
+};
+
+// Adds an object to the social table
+export const addUser = async (body: any) => {
+  return Query(`INSERT INTO social SET ?`, [body]);
+};
+
 export default {
   all,
   one,
@@ -61,4 +71,6 @@ export default {
   allByUser,
   getUserActivities,
   getUserDetails,
+  getSuggestedUsers,
+  addUser,
 };

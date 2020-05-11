@@ -1,12 +1,12 @@
 import * as React from "react";
 import { apiService, User } from "../utils/apiService";
 import { IActivity } from "../utils/types";
-import { useHistory } from "react-router";
+import { useParams } from "react-router";
 import moment from "moment";
 import ActivityCard from "../components/ActivityCard";
 
 const ViewUser: React.FC<ViewUserProps> = () => {
-  const history = useHistory();
+  const params: any = useParams();
 
   const [user, setUser] = React.useState<any>([]);
   const [activities, setActivities] = React.useState<IActivity[]>([]);
@@ -17,11 +17,13 @@ const ViewUser: React.FC<ViewUserProps> = () => {
 
   React.useEffect(() => {
     (async () => {
-      let activities = await apiService(`/api/activities/user/${User.userid}`);
+      let activities = await apiService(
+        `/api/activities/user/${params.userId}`
+      );
       setActivities(activities);
 
       let user = await apiService(
-        `/api/activities/user_details/${User.userid}`
+        `/api/activities/user_details/${params.userId}`
       );
       setUser(user);
 
@@ -49,7 +51,10 @@ const ViewUser: React.FC<ViewUserProps> = () => {
       <section className="row my-2 justify-content-center">
         {user?.map((user: any) => {
           return (
-            <div className="col-md-6 d-flex flex-column justify-content-start align-items-center" key={`${user.id}-${user.firstname}`}>
+            <div
+              className="col-md-6 d-flex flex-column justify-content-start align-items-center"
+              key={`${user.id}-${user.firstname}`}
+            >
               <div className="avatar bg-success text-light text-center">
                 {user.firstname[0]}
               </div>

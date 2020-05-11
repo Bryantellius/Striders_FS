@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import type { IActivity } from "../utils/types";
 import { apiService, User } from "../utils/apiService";
 import ActivityCard from "../components/ActivityCard";
+import SuggestedUsers from "../components/SuggestedUsers";
 import UserCard from "../components/UserCard";
 
 const Home: React.FC<HomeProps> = () => {
@@ -37,7 +38,9 @@ const Home: React.FC<HomeProps> = () => {
             ))}
           </div>
         </div>
-        <div className="col-md-3">Suggested Friends Col</div>
+        <div className="col-md-3">
+          <SuggestedUsers />
+        </div>
       </section>
     </main>
   );
