@@ -17,7 +17,8 @@ const SuggestedUsers: React.FC<SuggestedUsersProps> = () => {
   React.useEffect(() => {
     (async () => {
       let users = await apiService(`/api/activities/allUsers/${User.userid}`);
-      setUsers(users);
+      let suggested = users.filter((user: any) => user.id != User.userid);
+      setUsers(suggested);
     })();
   }, []);
 

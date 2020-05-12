@@ -131,7 +131,7 @@ router.get("/userFollows/:id", async (req, res, next) => {
   try {
     let id = Number(req.params.id);
     let [activities] = await db.Activities.userFollows(id);
-    res.json(activities);
+    res.json(activities.reverse());
   } catch (err) {
     console.log(err);
     next(err);
