@@ -16,7 +16,7 @@ const Home: React.FC<HomeProps> = () => {
       history.push("/sign_up");
     } else {
       (async () => {
-        let activities = await apiService(`/api/activities`);
+        let activities = await apiService(`/api/activities/userFollows/${User.userid}`);
         setActivities(activities);
       })();
     }

@@ -119,8 +119,19 @@ router.get("/allUsers/:id", async (req, res, next) => {
 router.post("/addUser", async (req, res, next) => {
   try {
     let body = req.body;
-    let {insertId}: any = await db.Activities.addUser(body);
-    res.json({insertId});
+    let { insertId }: any = await db.Activities.addUser(body);
+    res.json({ insertId });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
+router.get("/userFollows/:id", async (req, res, next) => {
+  try {
+    let id = Number(req.params.id);
+    let [activities] = await db.Activities.userFollows(id);
+    res.json(activities);
   } catch (err) {
     console.log(err);
     next(err);

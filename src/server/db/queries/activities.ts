@@ -62,6 +62,11 @@ export const addUser = async (body: any) => {
   return Query(`INSERT INTO social SET ?`, [body]);
 };
 
+// Returns all activities from members that the user follows
+export const userFollows = async (id: number) => {
+  return Query(`CALL spUserFollows(?)`, [id]);
+};
+
 export default {
   all,
   one,
@@ -73,4 +78,5 @@ export default {
   getUserDetails,
   getSuggestedUsers,
   addUser,
+  userFollows,
 };

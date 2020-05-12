@@ -57,8 +57,13 @@ main {
 
 .avatarSmall:hover,
 .activityTitle:hover,
-.avatarReallySmall {
+.avatarReallySmall,
+svg {
   cursor: pointer;
+}
+
+.list-group-item:hover {
+  cursor: unset;
 }
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

@@ -8,9 +8,10 @@ const SuggestedUsers: React.FC<SuggestedUsersProps> = () => {
 
   const addUser = async (userid: number) => {
     let added = await apiService(`/api/activities/addUser`, "POST", {
-      id: User.userid,
-      userid,
+      userid: User.userid,
+      following_userid: userid,
     });
+    setUsers(users.filter((user: any) => userid !== user.id));
   };
 
   React.useEffect(() => {

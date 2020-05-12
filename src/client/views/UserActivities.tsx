@@ -1,5 +1,6 @@
 import * as React from "react";
 import { apiService, User } from "../utils/apiService";
+import { setProgressBar } from "../utils/Functions";
 import { IActivity } from "../utils/types";
 import { useParams } from "react-router";
 import moment from "moment";
@@ -43,6 +44,10 @@ const ViewUser: React.FC<ViewUserProps> = () => {
       setWalks(walks);
       setBikes(bikes);
       setSwims(swims);
+
+      setProgressBar(activities, runs, walks, bikes, swims);
+      // setSums(activities, runs, walks, bikes, swims);
+      
     })();
   }, []);
 
@@ -103,35 +108,45 @@ const ViewUser: React.FC<ViewUserProps> = () => {
           <h5>Activity Breakdown</h5>
           <div className="progress my-4">
             <div
-              className="progress-bar bg-success w-25"
+              id="runs"
+              className="progress-bar bg-success"
               role="progressbar"
             ></div>
             <div
-              className="progress-bar bg-warning w-25"
+              id="walks"
+              className="progress-bar bg-warning"
               role="progressbar"
             ></div>
-            <div className="progress-bar bg-dark w-25" role="progressbar"></div>
-            <div className="progress-bar w-25" role="progressbar"></div>
+            <div
+              id="bikes"
+              className="progress-bar bg-dark"
+              role="progressbar"
+            ></div>
+            <div id="swims" className="progress-bar" role="progressbar"></div>
           </div>
-          <div className="row my-4">
-            <div className="col-sm-3">
-              <div className="d-inline rounded shadow-sm mx-2 p-2 bg-success text-light">
-                Run
+          <div className="card p-3">
+            <div className="">
+              <div className="rounded shadow-sm mx-2 p-2 bg-success text-light">
+                <span>Run</span>
+                <div className="badge badge-light">Test</div>
               </div>
             </div>
-            <div className="col-sm-3">
-              <div className="d-inline rounded shadow-sm mx-2 p-2 bg-warning text-light">
-                Walk
+            <div className="">
+              <div className="rounded shadow-sm mx-2 p-2 bg-warning text-light">
+                <span>Walk</span>
+                <div className="badge badge-light">Test</div>
               </div>
             </div>
-            <div className="col-sm-3">
-              <div className="d-inline rounded shadow-sm mx-2 p-2 bg-dark text-light">
-                Bike
+            <div className="">
+              <div className="rounded shadow-sm mx-2 p-2 bg-dark text-light">
+                <span>Bike</span>
+                <div className="badge badge-light">Test</div>
               </div>
             </div>
-            <div className="col-sm-3">
-              <div className="d-inline rounded shadow-sm mx-2 p-2 bg-primary text-light">
-                Swim
+            <div className="">
+              <div className="rounded shadow-sm mx-2 p-2 bg-primary text-light">
+                <span>Swim</span>
+                <div className="badge badge-light">Test</div>
               </div>
             </div>
           </div>
