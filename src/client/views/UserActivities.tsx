@@ -1,6 +1,6 @@
 import * as React from "react";
 import { apiService, User } from "../utils/apiService";
-import { setProgressBar } from "../utils/Functions";
+import { setProgressBar, getSums } from "../utils/Functions";
 import { IActivity } from "../utils/types";
 import { useParams } from "react-router";
 import moment from "moment";
@@ -15,6 +15,7 @@ const ViewUser: React.FC<ViewUserProps> = () => {
   const [walks, setWalks] = React.useState<IActivity[]>([]);
   const [bikes, setBikes] = React.useState<IActivity[]>([]);
   const [swims, setSwims] = React.useState<IActivity[]>([]);
+  const [sums, setSums] = React.useState<any>({});
 
   React.useEffect(() => {
     (async () => {
@@ -46,8 +47,8 @@ const ViewUser: React.FC<ViewUserProps> = () => {
       setSwims(swims);
 
       setProgressBar(activities, runs, walks, bikes, swims);
-      // setSums(activities, runs, walks, bikes, swims);
-      
+      let sums: any = getSums(activities, runs, walks, bikes, swims);
+      setSums(sums);
     })();
   }, []);
 
@@ -95,16 +96,6 @@ const ViewUser: React.FC<ViewUserProps> = () => {
       </section>
       <section className="row">
         <div className="col-md-6">
-          {activities.map((activity) => {
-            return (
-              <ActivityCard
-                entry={activity}
-                key={`${activity.id}-${activity.type}-${activity.date}`}
-              />
-            );
-          })}
-        </div>
-        <div className="col-md-6">
           <h5>Activity Breakdown</h5>
           <div className="progress my-4">
             <div
@@ -126,30 +117,40 @@ const ViewUser: React.FC<ViewUserProps> = () => {
           </div>
           <div className="card p-3">
             <div className="">
-              <div className="rounded shadow-sm mx-2 p-2 bg-success text-light">
+              <div className="d-flex justify-content-around rounded shadow-sm mx-2 p-2 bg-success text-light">
                 <span>Run</span>
-                <div className="badge badge-light">Test</div>
+                <div className="badge badge-light">{sums?.rs}mi</div>
               </div>
             </div>
             <div className="">
-              <div className="rounded shadow-sm mx-2 p-2 bg-warning text-light">
+              <div className="d-flex justify-content-around rounded shadow-sm mx-2 p-2 bg-warning text-light">
                 <span>Walk</span>
-                <div className="badge badge-light">Test</div>
+                <div className="badge badge-light">{sums?.ws}mi</div>
               </div>
             </div>
             <div className="">
-              <div className="rounded shadow-sm mx-2 p-2 bg-dark text-light">
+              <div className="d-flex justify-content-around rounded shadow-sm mx-2 p-2 bg-dark text-light">
                 <span>Bike</span>
-                <div className="badge badge-light">Test</div>
+                <div className="badge badge-light">{sums?.bs}mi</div>
               </div>
             </div>
             <div className="">
-              <div className="rounded shadow-sm mx-2 p-2 bg-primary text-light">
+              <div className="d-flex justify-content-around rounded shadow-sm mx-2 p-2 bg-primary text-light">
                 <span>Swim</span>
-                <div className="badge badge-light">Test</div>
+                <div className="badge badge-light">{sums?.ss}mi</div>
               </div>
             </div>
           </div>
+        </div>
+        <div className="col-md-6">
+          {activities.map((activity) => {
+            return (
+              <ActivityCard
+                entry={activity}
+                key={`${activity.id}-${activity.type}-${activity.date}`}
+              />
+            );
+          })}
         </div>
       </section>
     </main>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { User, apiService } from "../utils/apiService";
 import { IActivity } from "../utils/types";
 
@@ -17,7 +17,7 @@ const UserCard: React.FC<IUserCardProps> = (entries) => {
 
   return (
     <div className="card border-light shadow-sm">
-      {user.map((user: any) => {
+      {user?.map((user: any) => {
         return (
           <div
             className="card-body d-flex flex-column align-items-center"

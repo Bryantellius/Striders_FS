@@ -1,5 +1,6 @@
 import * as React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import { User } from "./utils/apiService";
 import NavBar from "./components/NavBar";
 import Login from "./views/Login";
 import SignUp from "./views/SignUp";

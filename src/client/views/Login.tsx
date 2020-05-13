@@ -17,9 +17,12 @@ const Login: React.FC<LoginProps> = () => {
         setAccessToken(res.token, { userid: res.userid, role: res.role });
         history.replace("/");
       } else {
-        //Checking login status
+        document.getElementById("loginForm").style.border = "2px solid red";
+        document.getElementById("error").style.display = "block";
       }
     } catch (e) {
+      document.getElementById("loginForm").style.border = "2px solid red";
+      document.getElementById("error").style.display = "block";
       throw e;
     }
   };
@@ -28,7 +31,10 @@ const Login: React.FC<LoginProps> = () => {
     <main className="container">
       <section className="row my-2 justify-content-center">
         <div className="col-md-8">
-          <form className="form-group p-3 border rounded shadow">
+          <div id="error" className="alert alert-danger d-none">
+            Email or Password is incorrect. Try again.
+          </div>
+          <form id="loginForm" className="form-group p-3 border rounded shadow">
             <h2 className="text-center p-2 mb-4 border-bottom border-success">
               Sign In
             </h2>

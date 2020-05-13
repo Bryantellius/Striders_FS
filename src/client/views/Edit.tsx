@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { apiService } from "../utils/apiService";
+import { apiService, User } from "../utils/apiService";
 
 const Edit: React.FC<EditProps> = () => {
   const { activityId } = useParams();
@@ -14,12 +14,17 @@ const Edit: React.FC<EditProps> = () => {
   const [desciption, setDesciption] = React.useState<string>("");
 
   React.useEffect(() => {
-    (async () => {
-      const res = await apiService(`/api/activities/${activityId}`);
-      setType(res.type);
-      setDistance(res.distance.toString());
-      setDuration(res.duration);
-    })();
+    if (!User || User.userid === null || User.role !== "guest") {
+      console.log(`Didn't recognize user`);
+      history.push("/sign_up");
+    } else {
+      (async () => {
+        const res = await apiService(`/api/activities/${activityId}`);
+        setType(res.type);
+        setDistance(res.distance.toString());
+        setDuration(res.duration);
+      })();
+    }
   }, []);
 
   const updateAct = async (e: React.MouseEvent<HTMLButtonElement>) => {

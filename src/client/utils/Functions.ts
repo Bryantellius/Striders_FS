@@ -1,3 +1,5 @@
+import { IActivity } from "./types";
+
 export const setProgressBar = async (
   activities: [],
   runs: [],
@@ -5,33 +7,44 @@ export const setProgressBar = async (
   bikes: [],
   swims: []
 ) => {
-  let rw = Math.floor(runs.length / activities.length) * 100;
-  let ww = Math.floor(walks.length / activities.length) * 100;
-  let bw = Math.floor(bikes.length / activities.length) * 100;
-  let sw = Math.floor(swims.length / activities.length) * 100;
+  let rw = Math.round((runs.length / activities.length) * 100);
+  let ww = Math.round((walks.length / activities.length) * 100);
+  let bw = Math.round((bikes.length / activities.length) * 100);
+  let sw = Math.round((swims.length / activities.length) * 100);
 
   document.getElementById("runs").style.width = `${rw}%`;
-  document.getElementById("runs").innerHTML = `${rw}%`;
+  if (rw > 0) {
+    document.getElementById("runs").innerHTML = `${rw}%`;
+  }
   document.getElementById("walks").style.width = `${ww}%`;
-  document.getElementById("walks").innerHTML = `${ww}%`;
+  if (ww > 0) {
+    document.getElementById("walks").innerHTML = `${ww}%`;
+  }
   document.getElementById("bikes").style.width = `${bw}%`;
-  document.getElementById("bikes").innerHTML = `${bw}%`;
+  if (bw > 0) {
+    document.getElementById("bikes").innerHTML = `${bw}%`;
+  }
   document.getElementById("swims").style.width = `${sw}%`;
-  document.getElementById("swims").innerHTML = `${sw}%`;
+  if (sw > 0) {
+    document.getElementById("swims").innerHTML = `${sw}%`;
+  }
 };
 
-export const setSums = (
-  activities: [],
-  runs: any[],
-  walks: any[],
-  bikes: any[],
-  swims: any[]
+export const getSums = (
+  activities: IActivity[],
+  runs: IActivity[],
+  walks: IActivity[],
+  bikes: IActivity[],
+  swims: IActivity[]
 ) => {
-//   let rs = activities.reduce(
-    // (acc: number, distance: number) => acc + distance
-//   );
+  let rs = runs.reduce((acc, { distance }) => acc + Number(distance), 0);
+  let ws = walks.reduce((acc, { distance }) => acc + Number(distance), 0);
+  let bs = bikes.reduce((acc, { distance }) => acc + Number(distance), 0);
+  let ss = swims.reduce((acc, { distance }) => acc + Number(distance), 0);
+  return { rs, ws, bs, ss };
 };
 
 export default {
   setProgressBar,
+  getSums,
 };

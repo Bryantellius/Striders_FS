@@ -25,6 +25,13 @@ const Add: React.FC<AddProps> = () => {
     history.push(`/`);
   };
 
+  React.useEffect(() => {
+    if (!User || User.userid === null || User.role !== "guest") {
+      console.log(`Didn't recognize user`);
+      history.push("/sign_up");
+    }
+  }, []);
+
   return (
     <main className="container">
       <section className="row my-2 justify-content-center">
