@@ -7,7 +7,7 @@ const SuggestedUsers: React.FC<SuggestedUsersProps> = () => {
   const history = useHistory();
 
   const addUser = async (userid: number) => {
-    let added = await apiService(`/api/members/addUser`, "POST", {
+    let added = await apiService(`/api/members/followUser`, "POST", {
       userid: User.userid,
       following_userid: userid,
     });

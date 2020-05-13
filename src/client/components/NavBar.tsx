@@ -8,17 +8,20 @@ const NavBar: React.FC<NavBarProps> = () => {
 
   const [state, setState] = React.useState<string>("");
   const [to, setTo] = React.useState<string>("");
+  const [searchItem, setSearchItem] = React.useState<string>("");
 
   const signout = () => {
     localStorage.clear();
     RemoveAccessToken();
-    console.log(User);
     history.push("/sign_up");
+  };
+
+  const searchUser = () => {
+    history.push(`/search/${searchItem}`)
   };
 
   React.useEffect(() => {
     (async () => {
-      console.log(location.pathname);
       if (location.pathname === "/login") {
         setState("Sign Up");
         setTo("/sign_up");
@@ -47,14 +50,42 @@ const NavBar: React.FC<NavBarProps> = () => {
   } else {
     return (
       <nav className="nav justify-content-between align-items-center shadow-sm">
-        <NavLink to="/" className="logo text-success nav-link">
-          Striders
-        </NavLink>
-        <div className="d-flex">
-          <NavLink
-            to="/add"
-            className="mx-2 nav-link"
-          >
+        <div className="d-flex justify-content-center align-items-center">
+          <NavLink to="/" className="logo text-success nav-link">
+            Striders
+          </NavLink>
+          <div className="input-group mx-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search User"
+              value={searchItem}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchItem(e.target.value)}
+            />
+            <div
+              className="input-group-append p-2 text-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="feather feather-search text-success"
+                onClick={searchUser}
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div className="d-flex mr-2">
+          <NavLink to="/add" className="nav-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -67,17 +98,29 @@ const NavBar: React.FC<NavBarProps> = () => {
               strokeLinejoin="round"
               className="feather feather-plus-square text-success"
             >
-              <rect x="0" y="0" width="24" height="24" rx="4" ry="4"></rect>
-              <line x1="12" y1="6" x2="12" y2="18"></line>
-              <line x1="6" y1="12" x2="18" y2="12"></line>
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
             </svg>
           </NavLink>
-          <button
-            className="btn nav-link btn-outline-success btn-sm text-success mx-2"
-            onClick={signout}
-          >
-            Sign Out
-          </button>
+          <div className="text-center p-2" onClick={signout}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-log-out text-success"
+            >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </div>
         </div>
       </nav>
     );

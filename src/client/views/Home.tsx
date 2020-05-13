@@ -10,9 +10,29 @@ const Home: React.FC<HomeProps> = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
   const history = useHistory();
 
+  const showTimeline = () => {
+    if (activities.length === 0) {
+      return (
+        <div className="alert alert-info">
+          Follow Users to start seeing content!
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {activities.map((item) => (
+            <ActivityCard
+              key={`${item.id}-${item.type}-${item.date}`}
+              entry={item}
+            />
+          ))}
+        </div>
+      );
+    }
+  };
+
   useEffect(() => {
     if (!User || User.userid === null || User.role !== "guest") {
-      console.log(`Didn't recognize user`);
       history.push("/sign_up");
     } else {
       (async () => {
@@ -23,7 +43,7 @@ const Home: React.FC<HomeProps> = () => {
       })();
     }
   }, []);
-  
+
   return (
     <main className="container-fluid">
       <section className="row my-2 justify-content-center">
@@ -31,14 +51,7 @@ const Home: React.FC<HomeProps> = () => {
           <UserCard entries={activities} />
         </div>
         <div id="homeActivities" className="col-md-6">
-          <div>
-            {activities.map((item) => (
-              <ActivityCard
-                key={`${item.id}-${item.type}-${item.date}`}
-                entry={item}
-              />
-            ))}
-          </div>
+          {showTimeline()}
         </div>
         <div className="col-md-3">
           <SuggestedUsers />

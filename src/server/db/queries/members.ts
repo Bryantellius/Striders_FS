@@ -31,10 +31,19 @@ export const followedUsers = async (id: number) => {
   );
 };
 
+// Returns a search results for users
+export const searchResults = async (name: string) => {
+  return Query(
+    `SELECT u.id, u.firstname, u.lastname FROM users u WHERE u.firstname LIKE ? OR u.lastname LIKE ?`,
+    [`%${name}%`, `%${name}%`]
+  );
+};
+
 export default {
   getUserDetails,
   getSuggestedUsers,
   addUser,
   removeUser,
   followedUsers,
+  searchResults,
 };

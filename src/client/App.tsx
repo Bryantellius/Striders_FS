@@ -9,6 +9,7 @@ import Add from "./views/Add";
 import Edit from "./views/Edit";
 import SingleEntry from "./views/SingleEntry";
 import UserActivities from "./views/UserActivities";
+import UserSearch from "./views/UserSearch";
 
 const App: React.FC<AppProps> = () => {
   return (
@@ -35,6 +36,9 @@ const App: React.FC<AppProps> = () => {
         </Route>
         <Route path="/user_activities/:userId">
           <UserActivities />
+        </Route>
+        <Route path="/search/:user">
+          <UserSearch />
         </Route>
       </Switch>
     </BrowserRouter>

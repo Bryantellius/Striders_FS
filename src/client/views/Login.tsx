@@ -13,7 +13,6 @@ const Login: React.FC<LoginProps> = () => {
     try {
       let res = await apiService(`/auth/login`, "POST", { email, password });
       if (res) {
-        console.log(`Result good. Setting token...`);
         setAccessToken(res.token, { userid: res.userid, role: res.role });
         history.replace("/");
       } else {

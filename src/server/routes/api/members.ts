@@ -3,7 +3,16 @@ import db from "../../db/models";
 
 const router = express.Router();
 
-router.get("/user_details/:id", async (req, res, next) => {
+const isLoggedIn: express.RequestHandler = (req: any, res, next) => {
+  if (!req.user || req.user.role !== "guest") {
+    console.log(`req.user.role: ${req.user.role}`);
+    return res.sendStatus(401);
+  } else {
+    return next();
+  }
+};
+
+router.get("/user_details/:id", isLoggedIn, async (req, res, next) => {
   try {
     let id = Number(req.params.id);
     let [user] = await db.Members.getUserDetails(id);
@@ -14,7 +23,7 @@ router.get("/user_details/:id", async (req, res, next) => {
   }
 });
 
-router.get("/following/:id", async (req, res, next) => {
+router.get("/following/:id", isLoggedIn, async (req, res, next) => {
   try {
     let id = Number(req.params.id);
     let users = await db.Members.followedUsers(id);
@@ -25,7 +34,7 @@ router.get("/following/:id", async (req, res, next) => {
   }
 });
 
-router.get("/suggestedUsers/:id", async (req, res, next) => {
+router.get("/suggestedUsers/:id", isLoggedIn, async (req, res, next) => {
   try {
     let id = Number(req.params.id);
     let [users] = await db.Members.getSuggestedUsers(id);
@@ -36,7 +45,18 @@ router.get("/suggestedUsers/:id", async (req, res, next) => {
   }
 });
 
-router.post("/followUser", async (req, res, next) => {
+router.get("/search/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    let name = req.params.id;
+    let users = await db.Members.searchResults(name);
+    res.json(users);
+  } catch (err) {
+    console.log(err)
+    next(err)
+  }
+})
+
+router.post("/followUser", isLoggedIn, async (req, res, next) => {
   try {
     let body = req.body;
     let { insertId }: any = await db.Members.addUser(body);
@@ -47,7 +67,7 @@ router.post("/followUser", async (req, res, next) => {
   }
 });
 
-router.delete("/unfollowUser", async (req, res, next) => {
+router.delete("/unfollowUser", isLoggedIn, async (req, res, next) => {
   try {
     let body = req.body;
     let { affectedRows }: any = await db.Members.removeUser(body);

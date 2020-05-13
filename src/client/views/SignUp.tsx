@@ -19,7 +19,7 @@ const SignUp: React.FC<SignUpProps> = () => {
 
     // If statements check for inputed values, if blank, displays error messages
     if (FNInput.value === "") {
-      console.log(FNInput.value);
+      
       document.getElementById("FNError").style.display = "block";
       FNInput.style.border = "2px solid red";
       return;
@@ -48,7 +48,6 @@ const SignUp: React.FC<SignUpProps> = () => {
         lastname,
       });
       if (res) {
-        console.log(`Result good. Setting token...`);
         setAccessToken(res.token, { userid: res.userid, role: res.role });
         history.replace("/");
       }
