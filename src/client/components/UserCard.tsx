@@ -9,7 +9,7 @@ const UserCard: React.FC<IUserCardProps> = (entries) => {
   React.useEffect(() => {
     (async () => {
       let user = await apiService(
-        `/api/activities/user_details/${User.userid}`
+        `/api/members/user_details/${User.userid}`
       );
       setUser(user);
     })();

@@ -2,6 +2,7 @@ import * as mysql from "mysql";
 import config from "../../config";
 import Activities from "../queries/activities";
 import Users from "../queries/users";
+import Members from "../queries/members";
 import Tokens from "../queries/tokens";
 import { IActivity } from "../../utils/types";
 
@@ -23,4 +24,4 @@ export const Query = (
   });
 };
 
-export default { Activities, Users, Tokens };
+export default { Activities, Members, Users, Tokens };

@@ -16,17 +16,75 @@ const ViewUser: React.FC<ViewUserProps> = () => {
   const [bikes, setBikes] = React.useState<IActivity[]>([]);
   const [swims, setSwims] = React.useState<IActivity[]>([]);
   const [sums, setSums] = React.useState<any>({});
+  const [show, setShow] = React.useState<boolean>(true);
+  const [doesFollow, setdoesFollow] = React.useState<boolean>(false);
+
+  const toggleFollow = async (userid: number) => {
+    if (doesFollow) {
+      let removed = await apiService(`/api/members/unfollowUser`, "DELETE", {
+        userid: User.userid,
+        following_userid: userid,
+      });
+      setdoesFollow(false);
+    } else {
+      let added = await apiService(`/api/members/followUser`, "POST", {
+        userid: User.userid,
+        following_userid: userid,
+      });
+      setdoesFollow(true);
+    }
+  };
+
+  const buttonDetails = (userid: number) => {
+    if (show) {
+      if (doesFollow) {
+        return (
+          <button
+            id="followBtn"
+            className="btn btn-sm btn-outline-success my-3"
+            onClick={() => toggleFollow(userid)}
+          >
+            Unfollow
+          </button>
+        );
+      } else {
+        return (
+          <button
+            id="followBtn"
+            className="btn btn-sm btn-outline-success my-3"
+            onClick={() => toggleFollow(userid)}
+          >
+            Follow
+          </button>
+        );
+      }
+    }
+  };
 
   React.useEffect(() => {
     (async () => {
+      // Determines if the user viewing the page is the same as the user who published the activity
+      // And if the member is currently followed by the user
+      if (User.userid == params.userId) {
+        setShow(false);
+      } else {
+        let followers = await apiService(
+          `/api/members/following/${User.userid}`
+        );
+        let follows = followers.some((item: any) => params.userId == item.id);
+
+        if (follows) {
+          setdoesFollow(true);
+        } else {
+          setdoesFollow(false);
+        }
+      }
       let activities = await apiService(
         `/api/activities/user/${params.userId}`
       );
       setActivities(activities);
 
-      let user = await apiService(
-        `/api/activities/user_details/${params.userId}`
-      );
+      let user = await apiService(`/api/members/user_details/${params.userId}`);
       setUser(user);
 
       let runs = activities.filter(
@@ -70,6 +128,7 @@ const ViewUser: React.FC<ViewUserProps> = () => {
               <small className="text-muted text-center d-block">
                 Member since {moment(user.created).format("MMM Do YYYY")}
               </small>
+              {buttonDetails(user.id)}
             </div>
           );
         })}

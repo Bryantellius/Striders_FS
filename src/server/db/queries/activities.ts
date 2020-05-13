@@ -31,39 +31,13 @@ export const remove = async (id: number) => {
   return Query("DELETE FROM activity WHERE id = ?", [id]);
 };
 
-// Returns activities associated with a userid
-export const allByUser = async (id: number) => {
-  return Query(
-    `SELECT a.id, a.userid, u.firstname, u.lastname, a.type, a.title, a.desciption, a.duration, a.distance, a._created as date
-  FROM activity a 
-  JOIN users u ON u.id = a.userid
-  WHERE u.id = ?`,
-    [id]
-  );
-};
-
 // Returns user activities
-export const getUserActivities = async (id: number) => {
+export const allByUser = async (id: number) => {
   return Query(`CALL spGetUser(?)`, [id]);
 };
 
-// Returns user info
-export const getUserDetails = async (id: number) => {
-  return Query(`CALL spUserDetails(?)`, [id]);
-};
-
-// Returns all members not followed by user
-export const getSuggestedUsers = async (id: number) => {
-  return Query(`CALL spSuggestedUsers(?)`, [id]);
-};
-
-// Adds an object to the social table
-export const addUser = async (body: any) => {
-  return Query(`INSERT INTO social SET ?`, [body]);
-};
-
 // Returns all activities from members that the user follows
-export const userFollows = async (id: number) => {
+export const followedActivities = async (id: number) => {
   return Query(`CALL spUserFollows(?)`, [id]);
 };
 
@@ -74,9 +48,5 @@ export default {
   update,
   remove,
   allByUser,
-  getUserActivities,
-  getUserDetails,
-  getSuggestedUsers,
-  addUser,
-  userFollows,
+  followedActivities,
 };

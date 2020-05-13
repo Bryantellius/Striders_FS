@@ -86,41 +86,8 @@ router.delete("/:id", isLoggedIn, async (req, res, next) => {
 router.get("/user/:id", async (req, res, next) => {
   try {
     let id = Number(req.params.id);
-    let [user] = await db.Activities.getUserActivities(id);
-    res.json(user.reverse());
-  } catch (err) {
-    console.log(err);
-    next(err);
-  }
-});
-
-router.get("/user_details/:id", async (req, res, next) => {
-  try {
-    let id = Number(req.params.id);
-    let [user] = await db.Activities.getUserDetails(id);
-    res.json(user);
-  } catch (err) {
-    console.log(err);
-    next(err);
-  }
-});
-
-router.get("/allUsers/:id", async (req, res, next) => {
-  try {
-    let id = Number(req.params.id);
-    let [users] = await db.Activities.getSuggestedUsers(id);
-    res.json(users);
-  } catch (err) {
-    console.log(err);
-    next(err);
-  }
-});
-
-router.post("/addUser", async (req, res, next) => {
-  try {
-    let body = req.body;
-    let { insertId }: any = await db.Activities.addUser(body);
-    res.json({ insertId });
+    let [activities] = await db.Activities.allByUser(id);
+    res.json(activities.reverse());
   } catch (err) {
     console.log(err);
     next(err);
@@ -130,8 +97,8 @@ router.post("/addUser", async (req, res, next) => {
 router.get("/userFollows/:id", async (req, res, next) => {
   try {
     let id = Number(req.params.id);
-    let [activities] = await db.Activities.userFollows(id);
-    res.json(activities.reverse());
+    let [activities] = await db.Activities.followedActivities(id);
+    res.json(activities);
   } catch (err) {
     console.log(err);
     next(err);

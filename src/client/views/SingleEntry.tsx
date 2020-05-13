@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { IActivity } from "../utils/types";
 import { apiService, User } from "../utils/apiService";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, NavLink } from "react-router-dom";
 import moment from "moment";
 
 const SingleEntry: React.FC<SingleEntryProps> = () => {
@@ -15,25 +15,45 @@ const SingleEntry: React.FC<SingleEntryProps> = () => {
     setActivity(activity);
   };
 
+  const allowEdit = (userid: number) => {
+    if (User.userid == userid) {
+      return (
+        <NavLink to={`/edit/${activity?.id}`}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-help-circle text-success"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </NavLink>
+      );
+    }
+  };
+
   React.useEffect(() => {
     getActivity();
   }, []);
 
   return (
     <main className="container">
-      <div className="row">
-        <div className="col-md-3">
-          <button
-            className="btn btn-info text-light"
-            onClick={() => history.push(`/edit/${activity.id}`)}
-          >
-            Edit
-          </button>
-        </div>
+      <div className="row justify-content-center">
         <div className="col-md-9">
           <div className="card">
-            <div className="card-header">
-              {activity?.firstname} {activity?.lastname} -- {activity?.type}
+            <div className="card-header d-flex justify-content-between">
+              <span>
+                {activity?.firstname} {activity?.lastname} -- {activity?.type}
+              </span>
+              {allowEdit(activity?.userid)}
             </div>
             <div className="card-body">
               <div className="row">
@@ -49,7 +69,7 @@ const SingleEntry: React.FC<SingleEntryProps> = () => {
                     <p>{activity?.desciption}</p>
                   </div>
                 </div>
-                <div className="col-md-6 card-deck">
+                <div className="col-md-6">
                   <div className="card d-flex flex-column justify-content-center align-items-center p-3">
                     <span>{activity?.distance}mi</span>
                     <small className="text-muted">Distance</small>
