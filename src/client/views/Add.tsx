@@ -6,10 +6,10 @@ const Add: React.FC<AddProps> = () => {
   const history = useHistory();
 
   const [type, setType] = React.useState<string>("Run");
-  const [distance, setDistance] = React.useState<string>("");
-  const [hours, setHours] = React.useState<string>("");
-  const [minutes, setMinutes] = React.useState<string>("");
-  const [seconds, setSeconds] = React.useState<string>("");
+  const [distance, setDistance] = React.useState<number>(0);
+  const [hours, setHours] = React.useState<number>(0);
+  const [minutes, setMinutes] = React.useState<number>(0);
+  const [seconds, setSeconds] = React.useState<number>(0);
   const [title, setTitle] = React.useState<string>("");
   const [desciption, setDesciption] = React.useState<string>("");
 
@@ -56,43 +56,49 @@ const Add: React.FC<AddProps> = () => {
             <h6 className="w-50 mx-auto d-block mb-3 border-bottom border-info p-2">
               Distance
             </h6>
-            <input
-              id="distance"
-              className="form-control w-50 mx-auto"
-              placeholder="0.0"
-              value={distance}
-              onChange={(e) => setDistance(e.target.value)}
-            />
+            <div className="input-group w-50 mx-auto">
+              <input
+                id="distance"
+                type="number"
+                className="form-control"
+                placeholder="0.0"
+                value={distance}
+                onChange={(e) => setDistance(Number(e.target.value))}
+              />
+              <div className="input-group-append">
+                <span className="input-group-text">miles</span>
+              </div>
+            </div>
             <h6 className="w-50 mx-auto d-block mb-3 border-bottom border-info p-2">
               Duration
             </h6>
             <div className="input-group w-50 mx-auto">
               <input
-                type="text"
+                type="number"
                 className="form-control text-center"
                 placeholder="00"
                 value={hours}
-                onChange={(e) => setHours(e.target.value)}
+                onChange={(e) => setHours(Number(e.target.value))}
               />
               <div className="input-group-append">
                 <span className="input-group-text">:</span>
               </div>
               <input
-                type="text"
+                type="number"
                 className="form-control text-center"
                 placeholder="00"
                 value={minutes}
-                onChange={(e) => setMinutes(e.target.value)}
+                onChange={(e) => setMinutes(Number(e.target.value))}
               />
               <div className="input-group-append">
                 <span className="input-group-text">:</span>
               </div>
               <input
-                type="text"
+                type="number"
                 className="form-control text-center"
                 placeholder="00"
                 value={seconds}
-                onChange={(e) => setSeconds(e.target.value)}
+                onChange={(e) => setSeconds(Number(e.target.value))}
               />
             </div>
             <h6 className="w-50 mx-auto d-block mb-3 border-bottom border-info p-2">

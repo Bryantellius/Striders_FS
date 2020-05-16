@@ -1,12 +1,12 @@
 import * as React from "react";
 import type { IActivity } from "../utils/types";
 import { apiService, User } from "../utils/apiService";
-import { useParams, useHistory, NavLink } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import moment from "moment";
+import MoreActivities from "../components/MoreActivities";
 
 const SingleEntry: React.FC<SingleEntryProps> = () => {
   const { activityId } = useParams();
-  const history = useHistory();
 
   const [activity, setActivity] = React.useState<IActivity>(null);
 
@@ -84,6 +84,14 @@ const SingleEntry: React.FC<SingleEntryProps> = () => {
           </div>
         </div>
       </div>
+      {/* <div className="row justify-content-center my-3">
+        <div className="col-md-9">
+          <h3 className="border-bottom border-info p-2">
+            Here's more by {activity?.firstname} {activity?.lastname}
+          </h3>
+          <MoreActivities userid={activity?.userid} />
+        </div>
+      </div> */}
     </main>
   );
 };

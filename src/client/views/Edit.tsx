@@ -8,7 +8,7 @@ const Edit: React.FC<EditProps> = () => {
   const history = useHistory();
 
   const [type, setType] = React.useState<string>("");
-  const [distance, setDistance] = React.useState<string>("");
+  const [distance, setDistance] = React.useState<number>(0);
   const [duration, setDuration] = React.useState<string>("");
   const [title, setTitle] = React.useState<string>("");
   const [desciption, setDesciption] = React.useState<string>("");
@@ -23,6 +23,8 @@ const Edit: React.FC<EditProps> = () => {
         setType(res.type);
         setDistance(res.distance.toString());
         setDuration(res.duration);
+        setTitle(res.title);
+        setDesciption(res.desciption);
       })();
     }
   }, []);
@@ -60,9 +62,10 @@ const Edit: React.FC<EditProps> = () => {
             <label htmlFor="distance">Distance</label>
             <input
               id="distance"
+              type="number"
               className="form-control"
               value={distance}
-              onChange={(e) => setDistance(e.target.value)}
+              onChange={(e) => setDistance(Number(e.target.value))}
             />
             <label htmlFor="duration">Duration</label>
             <input
