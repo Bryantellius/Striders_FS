@@ -6,11 +6,7 @@ import Members from "../queries/members";
 import Tokens from "../queries/tokens";
 import { IActivity } from "../../utils/types";
 
-export const Connection = mysql.createConnection(config.mysql);
-
-Connection.connect((err) => {
-  if (err) console.log(err);
-});
+export const Connection = mysql.createPool(config.mysql);
 
 export const Query = (
   query: string,
