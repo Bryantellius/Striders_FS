@@ -39,6 +39,9 @@ app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "../public/index.html"))
 );
 
-app.listen(config.port, () =>
+
+const port = process.env.port || 3000;
+
+app.listen(port, () =>
   console.log(`Server listening on port: ${config.port}`)
 );
