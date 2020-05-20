@@ -12,6 +12,7 @@ const SuggestedUsers: React.FC<SuggestedUsersProps> = () => {
       following_userid: userid,
     });
     setUsers(users.filter((user: any) => userid !== user.id));
+    window.location.reload();
   };
 
   React.useEffect(() => {
