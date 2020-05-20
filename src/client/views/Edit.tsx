@@ -45,7 +45,7 @@ const Edit: React.FC<EditProps> = () => {
   return (
     <main className="container">
       <section className="row my-2 justify-content-center">
-        <div className="col-md-8">
+        <div className="col-sm-6">
           <form className="form-group p-3 border shadow">
             <label htmlFor="type">Type of Exercise</label>
             <select
@@ -92,13 +92,13 @@ const Edit: React.FC<EditProps> = () => {
             />
 
             <button
-              className="btn btn-success btn-block w-25 mx-auto my-3"
+              className="btn btn-success btn-block w-50 mx-auto my-3"
               onClick={updateAct}
             >
               Update
             </button>
             <button
-              className="btn btn-danger btn-block w-25 mx-auto my-3"
+              className="btn btn-danger btn-block w-50 mx-auto my-3"
               onClick={deleteAct}
             >
               Delete

@@ -73,8 +73,8 @@ const SignUp: React.FC<SignUpProps> = () => {
             <h2 className="text-center p-2 mb-4 border-bottom border-success">
               Get moving. Join Striders Today.
             </h2>
-            <div className="row my-3">
-              <div className="col">
+            <div className="row">
+              <div className="col-sm-6 my-2">
                 <h4>First Name:</h4>
                 <small id="FNError" className="inputError">
                   Please enter Your First Name
@@ -88,7 +88,7 @@ const SignUp: React.FC<SignUpProps> = () => {
                   onChange={(e) => setFirstname(e.target.value)}
                 />
               </div>
-              <div className="col">
+              <div className="col-sm-6 my-2">
                 <h4>Last Name:</h4>
                 <small id="LNError" className="inputError">
                   Please enter Your Last Name
@@ -103,8 +103,8 @@ const SignUp: React.FC<SignUpProps> = () => {
                 />
               </div>
             </div>
-            <div className="row my-3">
-              <div className="col">
+            <div className="row my-2">
+              <div className="col-sm-6 my-2">
                 <h4>Email:</h4>
                 <small id="EError" className="inputError">
                   Please enter Valid Email Address
@@ -118,7 +118,7 @@ const SignUp: React.FC<SignUpProps> = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="col">
+              <div className="col-sm-6 my-2">
                 <h4>Password:</h4>
                 <small id="PError" className="inputError">
                   Password must be atleast 10 characters
@@ -134,7 +134,7 @@ const SignUp: React.FC<SignUpProps> = () => {
               </div>
             </div>
             <button
-              className="btn btn-success btn-block w-25 mx-auto my-3"
+              className="btn btn-success btn-block w-50 mx-auto my-2"
               onClick={SignUp}
             >
               Sign Up

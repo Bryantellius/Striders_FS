@@ -29,7 +29,7 @@ const Login: React.FC<LoginProps> = () => {
   return (
     <main className="container">
       <section className="row my-2 justify-content-center">
-        <div className="col-md-8">
+        <div className="col-sm-6">
           <div id="error" className="alert alert-danger d-none">
             Email or Password is incorrect. Try again.
           </div>
@@ -37,28 +37,30 @@ const Login: React.FC<LoginProps> = () => {
             <h2 className="text-center p-2 mb-4 border-bottom border-success">
               Sign In
             </h2>
-            <div className="my-3 w-50 mx-auto">
+            <div className="my-3">
               <h4>Email:</h4>
               <input
                 type="email"
                 id="email"
                 className="form-control"
+                placeholder="Enter Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
-            <div className="my-3 w-50 mx-auto">
+            <div className="my-3">
               <h4>Password:</h4>
               <input
                 type="password"
                 id="password"
                 className="form-control"
+                placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
             <button
-              className="btn btn-success btn-block w-25 mx-auto my-4"
+              className="btn btn-success btn-block w-50 mx-auto my-4"
               onClick={login}
             >
               Sign In
