@@ -30,6 +30,10 @@ export const setProgressBar = async (
   }
 };
 
+const round = (value: Number, decimals: Number) => {
+  return Number(Math.round(Number(value + "e" + decimals)) + "e-" + decimals);
+};
+
 export const getSums = (
   activities: IActivity[],
   runs: IActivity[],
@@ -41,7 +45,12 @@ export const getSums = (
   let ws = walks.reduce((acc, { distance }) => acc + Number(distance), 0);
   let bs = bikes.reduce((acc, { distance }) => acc + Number(distance), 0);
   let ss = swims.reduce((acc, { distance }) => acc + Number(distance), 0);
-  return { rs, ws, bs, ss };
+  return {
+    rs: round(rs, 2),
+    ws: round(ws, 2),
+    bs: round(bs, 2),
+    ss: round(ss, 2),
+  };
 };
 
 export default {
