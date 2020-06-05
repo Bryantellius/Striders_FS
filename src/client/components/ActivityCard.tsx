@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { IActivity } from "../utils/types";
+import { averagePace } from "../utils/Functions";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 
@@ -25,20 +26,33 @@ const ActivityCard: React.FC<ActivityCardProps> = (props) => {
           </small>
         </div>
       </div>
-      <h3 className="activityTitle" onClick={handleClick}>{props.entry.title}</h3>
+      <h3 className="activityTitle" onClick={handleClick}>
+        {props.entry.title}
+      </h3>
       <p>{props.entry.desciption}</p>
       <div className="row">
-        <div className="col-sm-4 d-flex flex-column align-items-center">
+        <div className="col-sm-3 d-flex flex-column align-items-center">
           <small className="text-muted">Type</small>
           <span>{props.entry.type}</span>
         </div>
-        <div className="col-sm-4 d-flex flex-column align-items-center">
+        <div className="col-sm-3 d-flex flex-column align-items-center">
           <small className="text-muted">Distance</small>
           <span>{props.entry.distance}mi</span>
         </div>
-        <div className="col-sm-4 d-flex flex-column align-items-center">
+        <div className="col-sm-3 d-flex flex-column align-items-center">
           <small className="text-muted">Duration</small>
-          <span>{props.entry.duration}</span>
+          <span>{`${props.entry.hrs}:${props.entry.min}:${props.entry.sec}`}</span>
+        </div>
+        <div className="col-sm-3 d-flex flex-column align-items-center">
+          <small className="text-muted">Pace</small>
+          <span>
+            {averagePace(
+              props.entry.hrs,
+              props.entry.min,
+              props.entry.sec,
+              props.entry.distance
+            )}
+          </span>
         </div>
       </div>
     </div>

@@ -4,7 +4,9 @@ export interface IActivity {
   type?: string;
   title?: string;
   desciption: string;
-  duration?: string;
+  hrs?: number;
+  min?: number;
+  sec?: number;
   distance?: number;
   _created?: Date;
 }

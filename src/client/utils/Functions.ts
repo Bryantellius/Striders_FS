@@ -53,7 +53,35 @@ export const getSums = (
   };
 };
 
+export const averagePace = (
+  hrs: number,
+  min: number,
+  sec: number,
+  distance: number
+) => {
+  hrs = hrs * 3600;
+  min = min * 60;
+  sec = sec;
+
+  let totalSeconds = hrs + min + sec;
+
+  let avgHrs = Math.floor(totalSeconds / 60 / 60 / distance);
+  let avgMin = Math.floor((totalSeconds / 60 - avgHrs * 60) / distance);
+  let avgSec = Math.floor((totalSeconds / distance) % 60);
+
+  let pace: string;
+
+  if (avgHrs === 0) {
+    pace = `${avgMin}:${avgSec}/mi`;
+  } else if (avgHrs === 0 && avgSec < 10) {
+    pace = `${avgMin}:0${avgSec}/mi`;
+  }
+
+  return pace;
+};
+
 export default {
   setProgressBar,
   getSums,
+  averagePace,
 };

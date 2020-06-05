@@ -66,4 +66,8 @@ svg {
   cursor: unset;
 }
 
+#errorAlert {
+  display: none;
+}
+
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

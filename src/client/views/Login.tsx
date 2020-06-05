@@ -16,12 +16,9 @@ const Login: React.FC<LoginProps> = () => {
         setAccessToken(res.token, { userid: res.userid, role: res.role });
         history.replace("/");
       } else {
-        document.getElementById("loginForm").style.border = "2px solid red";
-        document.getElementById("error").style.display = "block";
+        document.getElementById("errorAlert").style.display = "block";
       }
     } catch (e) {
-      document.getElementById("loginForm").style.border = "2px solid red";
-      document.getElementById("error").style.display = "block";
       throw e;
     }
   };
@@ -30,7 +27,7 @@ const Login: React.FC<LoginProps> = () => {
     <main className="container">
       <section className="row my-2 justify-content-center">
         <div className="col-sm-6">
-          <div id="error" className="alert alert-danger d-none">
+          <div id="errorAlert" className="alert alert-danger">
             Email or Password is incorrect. Try again.
           </div>
           <form id="loginForm" className="form-group p-3 border rounded shadow">

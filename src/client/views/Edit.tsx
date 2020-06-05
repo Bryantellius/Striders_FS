@@ -9,7 +9,9 @@ const Edit: React.FC<EditProps> = () => {
 
   const [type, setType] = React.useState<string>("");
   const [distance, setDistance] = React.useState<number>(0);
-  const [duration, setDuration] = React.useState<string>("");
+  const [hours, setHours] = React.useState<number>(0);
+  const [minutes, setMinutes] = React.useState<number>(0);
+  const [seconds, setSeconds] = React.useState<number>(0);
   const [title, setTitle] = React.useState<string>("");
   const [desciption, setDesciption] = React.useState<string>("");
 
@@ -22,7 +24,9 @@ const Edit: React.FC<EditProps> = () => {
         const res = await apiService(`/api/activities/${activityId}`);
         setType(res.type);
         setDistance(res.distance.toString());
-        setDuration(res.duration);
+        setHours(res.hrs);
+        setMinutes(res.min);
+        setSeconds(res.sec);
         setTitle(res.title);
         setDesciption(res.desciption);
       })();
@@ -31,7 +35,15 @@ const Edit: React.FC<EditProps> = () => {
 
   const updateAct = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let activity = { type, distance, duration, title, desciption };
+    let activity = {
+      type,
+      distance,
+      hrs: hours,
+      min: minutes,
+      sec: seconds,
+      title,
+      desciption,
+    };
     await apiService(`/api/activities/${activityId}`, "PUT", activity);
     history.push(`/activity/${activityId}`);
   };
@@ -67,14 +79,38 @@ const Edit: React.FC<EditProps> = () => {
               value={distance}
               onChange={(e) => setDistance(Number(e.target.value))}
             />
-            <label htmlFor="duration">Duration</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="00:00:00"
-              value={duration}
-              onChange={(e) => setDuration(e.target.value)}
-            />
+            <h6 className=" d-block mb-3 border-bottom border-info p-2">
+              Duration
+            </h6>
+            <div className="input-group ">
+              <input
+                type="number"
+                className="form-control text-center"
+                placeholder="00"
+                value={hours}
+                onChange={(e) => setHours(Number(e.target.value))}
+              />
+              <div className="input-group-append">
+                <span className="input-group-text">:</span>
+              </div>
+              <input
+                type="number"
+                className="form-control text-center"
+                placeholder="00"
+                value={minutes}
+                onChange={(e) => setMinutes(Number(e.target.value))}
+              />
+              <div className="input-group-append">
+                <span className="input-group-text">:</span>
+              </div>
+              <input
+                type="number"
+                className="form-control text-center"
+                placeholder="00"
+                value={seconds}
+                onChange={(e) => setSeconds(Number(e.target.value))}
+              />
+            </div>
             <label htmlFor="duration">Title</label>
             <input
               type="text"

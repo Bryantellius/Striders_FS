@@ -21,7 +21,7 @@ const SuggestedUsers: React.FC<SuggestedUsersProps> = () => {
         `/api/members/suggestedUsers/${User.userid}`
       );
       let suggested = users.filter((user: any) => user.id != User.userid);
-      setUsers(suggested);
+      setUsers(suggested.splice(0, 6));
     })();
   }, []);
 

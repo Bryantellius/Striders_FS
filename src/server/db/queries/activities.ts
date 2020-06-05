@@ -4,14 +4,14 @@ import { IActivity } from "../../utils/types";
 // Returns all activities
 export const all = async () => {
   return Query(
-    "SELECT a.id, a.userid, u.firstname, u.lastname, a.type, a.title, a.desciption, a.duration, a.distance, a._created as date FROM activity a JOIN users u ON u.id = a.userid ORDER BY a._created DESC"
+    "SELECT a.id, a.userid, u.firstname, u.lastname, a.type, a.title, a.desciption, a.hrs, a.min, a.sec, a.distance, a._created as date FROM activity a JOIN users u ON u.id = a.userid ORDER BY a._created DESC"
   );
 };
 
 // Returns one activity based on activity id
 export const one = async (id: number) => {
   return Query(
-    "SELECT a.id, a.userid, u.firstname, u.lastname, a.type, a.title, a.desciption, a.duration, a.distance, a._created as date FROM activity a JOIN users u ON u.id = a.userid WHERE a.id = ?",
+    "SELECT a.id, a.userid, u.firstname, u.lastname, a.type, a.title, a.desciption, a.hrs, a.min, a.sec, a.distance, a._created as date FROM activity a JOIN users u ON u.id = a.userid WHERE a.id = ?",
     [id]
   );
 };

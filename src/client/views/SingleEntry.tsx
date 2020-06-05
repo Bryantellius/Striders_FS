@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { IActivity } from "../utils/types";
+import { averagePace } from "../utils/Functions";
 import { apiService, User } from "../utils/apiService";
 import { useParams, NavLink } from "react-router-dom";
 import moment from "moment";
@@ -75,8 +76,19 @@ const SingleEntry: React.FC<SingleEntryProps> = () => {
                     <small className="text-muted">Distance</small>
                   </div>
                   <div className="card d-flex flex-column justify-content-center align-items-center p-3">
-                    <span>{activity?.duration}</span>
                     <small className="text-muted">Duration</small>
+                    <span>{`${activity?.hrs}:${activity?.min}:${activity?.sec}`}</span>
+                  </div>
+                  <div className="card d-flex flex-column justify-content-center align-items-center p-3">
+                    <small className="text-muted">Pace</small>
+                    <span>
+                      {averagePace(
+                        activity?.hrs,
+                        activity?.min,
+                        activity?.sec,
+                        activity?.distance
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>

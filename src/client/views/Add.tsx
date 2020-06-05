@@ -18,11 +18,18 @@ const Add: React.FC<AddProps> = () => {
     const activity = {
       type,
       distance,
-      duration: `${hours}:${minutes}:${seconds}`,
+      hrs: hours,
+      min: minutes,
+      sec: seconds,
       userid: User.userid,
       title,
       desciption,
     };
+
+    if (activity.title === "") {
+      delete activity.title;
+    }
+
     const result = await apiService(`/api/activities`, "POST", activity);
     history.push(`/`);
   };
@@ -38,7 +45,7 @@ const Add: React.FC<AddProps> = () => {
     <main className="container">
       <section className="row my-2 justify-content-center">
         <div className="col-sm-6">
-          <form className="form-group p-3 border shadow">
+          <form id="addForm" className="form-group p-3 border shadow">
             <h6 className=" d-block mb-3 border-bottom border-info p-2">
               Type of Exercise
             </h6>
