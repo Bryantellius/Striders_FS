@@ -77,7 +77,7 @@ const SingleEntry: React.FC<SingleEntryProps> = () => {
                   </div>
                   <div className="card d-flex flex-column justify-content-center align-items-center p-3">
                     <small className="text-muted">Duration</small>
-                    <span>{`${activity?.hrs}:${activity?.min}:${activity?.sec}`}</span>
+                    <span>{`${activity?.hrs}hr ${activity?.min}min ${activity?.sec}sec`}</span>
                   </div>
                   <div className="card d-flex flex-column justify-content-center align-items-center p-3">
                     <small className="text-muted">Pace</small>

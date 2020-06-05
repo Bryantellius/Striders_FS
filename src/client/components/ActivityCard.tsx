@@ -41,7 +41,7 @@ const ActivityCard: React.FC<ActivityCardProps> = (props) => {
         </div>
         <div className="col-sm-3 d-flex flex-column align-items-center">
           <small className="text-muted">Duration</small>
-          <span>{`${props.entry.hrs}:${props.entry.min}:${props.entry.sec}`}</span>
+          <span>{`${props.entry.hrs}hr ${props.entry.min}min ${props.entry.sec}sec`}</span>
         </div>
         <div className="col-sm-3 d-flex flex-column align-items-center">
           <small className="text-muted">Pace</small>

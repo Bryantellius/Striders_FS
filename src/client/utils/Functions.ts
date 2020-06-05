@@ -71,7 +71,7 @@ export const averagePace = (
 
   let pace: string;
 
-  if (avgHrs === 0) {
+  if (avgHrs === 0 && avgSec > 10) {
     pace = `${avgMin}:${avgSec}/mi`;
   } else if (avgHrs === 0 && avgSec < 10) {
     pace = `${avgMin}:0${avgSec}/mi`;
