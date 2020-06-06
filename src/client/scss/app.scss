@@ -11,12 +11,13 @@ $theme-colors: (
 }
 
 #homeActivities {
-  overflow-y: scroll;
-  height: 30rem;
+  height: auto;
 }
 
 main {
   background-color: rgb(245, 245, 245);
+  height: auto;
+  width: auto;
   padding: 1rem;
 }
 
