@@ -39,6 +39,11 @@ export const searchResults = async (name: string) => {
   );
 };
 
+// Returns an array of all users for search RN
+export const allUsers = async () => {
+  return Query("SELECT id, firstname, lastname FROM users");
+};
+
 export default {
   getUserDetails,
   getSuggestedUsers,
@@ -46,4 +51,5 @@ export default {
   removeUser,
   followedUsers,
   searchResults,
+  allUsers,
 };

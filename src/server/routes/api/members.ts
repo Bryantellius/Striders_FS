@@ -51,10 +51,20 @@ router.get("/search/:id", isLoggedIn, async (req, res, next) => {
     let users = await db.Members.searchResults(name);
     res.json(users);
   } catch (err) {
-    console.log(err)
-    next(err)
+    console.log(err);
+    next(err);
   }
-})
+});
+
+router.get("/all", isLoggedIn, async (req, res, next) => {
+  try {
+    let users = await db.Members.allUsers();
+    res.json(users);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
 
 router.post("/followUser", isLoggedIn, async (req, res, next) => {
   try {
